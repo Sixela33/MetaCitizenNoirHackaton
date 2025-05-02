@@ -53,6 +53,16 @@ export class AuthController {
   @Get('google/callback')
   async googleCallback(@Req() req, @Res() res) {
     const response = await this.authService.login(req.user.id);
-    res.redirect(`http://localhost:5173?token=${response.accessToken}`);
+    
+    // Option 1: Set token in an HTTP-only cookie
+    res.cookie('access_token', response.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // Use HTTPS in production
+      sameSite: 'strict',
+      maxAge: 15 * 60 * 1000, // 15 minutes (adjust based on your token expiry)
+    });
+    
+    // Redirect to frontend without exposing token in URL
+    res.redirect('http://localhost:5173');
   }
 }
