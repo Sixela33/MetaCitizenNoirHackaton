@@ -7,5 +7,6 @@ import { User } from 'src/user/entities/user.entity';
   imports: [TypeOrmModule.forFeature([ User])],
   controllers: [SumsubController],
   providers: [SumsubService],
+  exports: [SumsubService],
 })
 export class SumsubModule {}

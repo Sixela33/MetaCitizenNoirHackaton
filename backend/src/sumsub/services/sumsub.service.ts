@@ -79,6 +79,11 @@ export class SumsubService {
       
     }
 
+    /**
+     * Gets the personal data for the user
+     * @param applicantId 
+     * @returns 
+     */
     async getApplicantData(applicantId: string) {
         try {
             const response = await this.sumsubClient.get(`/resources/applicants/-;externalUserId=${applicantId}`);

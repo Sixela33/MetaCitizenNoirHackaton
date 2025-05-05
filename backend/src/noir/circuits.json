@@ -1,6 +1,6 @@
 {
     "noir_version": "1.0.0-beta.3+ceaa1986628197bd1170147f6a07f0f98d21030a",
-    "hash": 12508494855139790651,
+    "hash": 10322713338925094223,
     "abi": {
         "parameters": [
             {
@@ -11,16 +11,65 @@
                     "width": 8
                 },
                 "visibility": "private"
+            },
+            {
+                "name": "min_age",
+                "type": {
+                    "kind": "integer",
+                    "sign": "unsigned",
+                    "width": 8
+                },
+                "visibility": "public"
+            },
+            {
+                "name": "aml_security",
+                "type": {
+                    "kind": "integer",
+                    "sign": "unsigned",
+                    "width": 8
+                },
+                "visibility": "private"
+            },
+            {
+                "name": "min_aml_security",
+                "type": {
+                    "kind": "integer",
+                    "sign": "unsigned",
+                    "width": 8
+                },
+                "visibility": "public"
+            },
+            {
+                "name": "user_country",
+                "type": {
+                    "kind": "integer",
+                    "sign": "unsigned",
+                    "width": 32
+                },
+                "visibility": "private"
+            },
+            {
+                "name": "restricted_countries",
+                "type": {
+                    "kind": "array",
+                    "length": 15,
+                    "type": {
+                        "kind": "integer",
+                        "sign": "unsigned",
+                        "width": 32
+                    }
+                },
+                "visibility": "public"
             }
         ],
         "return_type": null,
         "error_types": {}
     },
-    "bytecode": "H4sIAAAAAAAA/7VTWwrDIBCMJqVtQr96kV0fif71Kg019z9CI11BFpuf6MAyyi7DOKrofpB7XWgt9uqJI257DdkcR5p7EcM5YD2tEAp262gjgCxkIHmAkgLM0TcMTMNsTFhUQI1vUH51FoxdZ4cOrbMf5bQOzrjFr34Bj0YH3KzXYYsAFBW0NjImG10kf3BnfYqKdxG1BubzCPkni7gTj1m/r+dPJf2pjT5cC2ccs/XEeukTDd3/bPheMj6aFQe6j0IvaT6Jc7/pHF+/t959NQUAAA==",
-    "debug_symbols": "lY/LCoMwEEX/ZdbZqKUt+ZVSJI+JDIQk5FEowX83ioLbLM+9Zy5MBY2yLDM54xPwTwXrlcjkXaMKwxGlINxOKYuYgY9vBug08Om1MjBkEfhzWL8Mxj596tMfPXoDGclaWub7Ry3+iUhCWjzRFKdubf6Hq7nuQ/QKdYm4Lx1dm98A",
+    "bytecode": "H4sIAAAAAAAA/+1aW27iQBBsg0l4hASCIbzf8O3BdrD3i6ssWnP/IyyzOy2Nhk4+lu6VkKYlNKaApqqmWgLbAfyt/fXxwxwH10fVrLrqDhYQWIXAqgQWXh9LB6sR2BOBPRNYncAaBNYksBaBvRBYm8BeCeyNwDoE1iWwdwLrGSw0+1CB20LsZNb4vlJ2ryT+TNPyeChVon7Gh+KcZ3GanT9zlassz34d8iQp8zQ/FufiGBcqTUp1yYrkYpoFXLxUHBPS2XrbvkZm7YOzGRqoOwTCBzH/X3uVF12xihh59YVCETh7cS/PiHFf/+cAVxg9qMLjDfDArB8YChxgDUgPsJT59w7wgJHXBzzGAA+Ad4ADi6Nd3AMcMnpQ4+MV29qHkuKHzAYMLeJcfR81EE8gE4iRpPgRswEj8IFA3s8gE4ixpPgxswFj8IFA3nWQCcREUvyE2YAJ+EAg7wbIBGIqKX7KbMAUfCCQdxNkAjGTFD9jNmAGPhDIuwUygZhLip8zGzAHHwjk/QIygVhIil8wG7AAHwjk3QaZQCwlxS+ZDViCDwTyfgWZQKwkxa+YDViBDwTyfgOZQKwlxa+ZDViDDwTy7oBMIDaS4jfMBmzABwJ5d0EmEFtJ8VtmA7bgA4G830EmEDtJ8TtmA3bgA4G8eyATiL2k+D2zAXvgDwTeuKer6oRB413zHG+30Fdd9YU2fW1Fn07XZ1D1STN9nkT/Ndb/hvQPYP2bp2M+r8Pcg9tCz/HWjYZZm853nnj25ID9WzL9/1xvcqtpHbe+0B8Snwu+eF5x1u/eG3zTt028hj1xr2y+qKPhrH2rL6OXCvtHMv3Jvepbx5Gj0/b7xMQB++Hc1eC2Ks5r+F53ZgJ+fsrlUiW+CwszE1kY+vkbXIPiNIksAAA=",
+    "debug_symbols": "ldXBioMwEMbxd5mzhyaZMdZXWZYSNZZAiBJ1YZG+e9NSoZRevlsmwy+X/yE7Db7brpeQxmmh9menOPVuDVMq00769LxbZpce47K6vFKralORT0M5WXuraAzRU1ur229FWsFCw8LAgr+K5vwSWqtPIbCoYWFh0XwT2h7CqOZTnFFhTrBQsNCwMLBgWAgsalhYWMDNDdyc4eYMN2e4OcPNGW7OcHOGmzPcnOHmDDcXuLnAzQVuLnBzgZsL3Fzg5gI2L0OXQ4zhenn/gcv1n8vBddG/xnFL/dt2/Z+PzeHnPPV+2LJ/vPTclefv",
     "file_map": {
         "61": {
-            "source": "fn main(age: u8) {\n  assert(age >= 18);\n}\n",
+            "source": "fn main(\n  age: u8, \n  min_age: pub u8, \n  aml_security: u8, \n  min_aml_security: pub u8,\n  user_country: u32, \n  restricted_countries: pub [u32; 15]\n) {\n  assert(age >= min_age);\n  assert(aml_security >= min_aml_security);\n\n  for i in 0..restricted_countries.len() {\n    assert(user_country != restricted_countries[i]);\n  }\n}\n\n/*\n  fn main(age: u8, min_age: pub u8) {\n    assert(age >= min_age);\n  }\n\n  #[test]\n  fn test_main() {\n    main(20, 18);\n  }\n*/",
             "path": "/home/s1x3l4/Desktop/onchain_id/prototypeV2/circuits/src/main.nr"
         }
     },
@@ -28,6 +77,7 @@
         "main"
     ],
     "brillig_names": [
-        "directive_integer_quotient"
+        "directive_integer_quotient",
+        "directive_invert"
     ]
 }

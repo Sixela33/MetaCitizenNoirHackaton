@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { SumsubModule } from './sumsub/sumsub.module';
 import { NoirService } from './noir/noir.service';
+import { NoirModule } from './noir/noir.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { NoirService } from './noir/noir.service';
     UserModule,
     AuthModule,
     SumsubModule,
+    NoirModule,
   ],
   controllers: [AppController],
   providers: [AppService, NoirService],
