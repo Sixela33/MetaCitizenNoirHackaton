@@ -43,7 +43,6 @@ export class SumsubService {
             
             signature.update(ts + config.method.toUpperCase() + config.url);
             
-            console.log('config', config.data);
             if (config.data) {
                 signature.update(JSON.stringify(config.data));
             }
@@ -79,5 +78,16 @@ export class SumsubService {
         }
       
     }
+
+    async getApplicantData(applicantId: string) {
+        try {
+            const response = await this.sumsubClient.get(`/resources/applicants/-;externalUserId=${applicantId}`);
+            return response.data;
+        } catch (error) {
+            console.log("error getting applicant data \n", error);
+            throw new Error('error getting applicant data ' + error.data)
+        }
+    }
+    
 }
 

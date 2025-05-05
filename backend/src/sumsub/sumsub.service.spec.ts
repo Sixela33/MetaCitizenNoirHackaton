@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SumsubService } from './sumsub.service';
+import { SumsubService } from './services/sumsub.service';
 
 describe('SumsubService', () => {
   let service: SumsubService;

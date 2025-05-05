@@ -1,13 +1,25 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { SumsubService } from './sumsub.service';
+import { Controller, Get, Query, Request } from '@nestjs/common';
+import { SumsubService } from './services/sumsub.service';
 
 @Controller('sumsub')
 export class SumsubController {
-  constructor(private readonly sumsubService: SumsubService) {}
+    constructor(
+        private readonly sumsubService: SumsubService, 
+    ) {}
 
   @Get('access-token')
-  async getAccessToken() {
-    const userId = 'user-' + Math.random().toString(36).substring(2, 15); // Generate unique session id
-    return this.sumsubService.generateAccessToken(userId, 'id-and-liveness', 600);
+  async getAccessToken(@Request() req: any) {
+    const user = req.user;
+    
+    const accessToken = await this.sumsubService.generateAccessToken(user.id, 'id-and-liveness', 600);
+        
+    return accessToken;
+  }
+  
+  @Get('kyc-status')
+  async getKycStatus(@Request() req: any) {
+    const user = req.user;
+    const applicantData = await this.sumsubService.getApplicantData(user.id);
+    return applicantData
   }
 }

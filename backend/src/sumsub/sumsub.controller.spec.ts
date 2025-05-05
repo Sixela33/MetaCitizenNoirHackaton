@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SumsubController } from './sumsub.controller';
-import { SumsubService } from './sumsub.service';
+import { SumsubService } from './services/sumsub.service';
 
 describe('SumsubController', () => {
   let controller: SumsubController;
