@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import axiosInstance from './utils/axios';
 import KycButton from './_components/KycButton';
+import ProofGeneratorInator from './components/ProofGeneratorInator';
 
 function App() {  
   const [user, setUser] = useState<any>(null);
@@ -72,6 +73,7 @@ function App() {
                   <p>Review Date: {kycStatus.list.items[0].review.reviewDate}</p>
                 </div>
               )}
+            <ProofGeneratorInator />
             </div>
           )}
         </div>
