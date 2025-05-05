@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { SumsubModule } from './sumsub/sumsub.module';
+import { NoirService } from './noir/noir.service';
 
 @Module({
   imports: [
@@ -26,6 +27,6 @@ import { SumsubModule } from './sumsub/sumsub.module';
     SumsubModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, NoirService],
 })
 export class AppModule {}
