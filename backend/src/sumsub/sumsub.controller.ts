@@ -3,9 +3,7 @@ import { SumsubService } from './services/sumsub.service';
 
 @Controller('sumsub')
 export class SumsubController {
-    constructor(
-        private readonly sumsubService: SumsubService, 
-    ) {}
+  constructor(private readonly sumsubService: SumsubService) {}
 
   @Get('access-token')
   async getAccessToken(@Request() req: any) {

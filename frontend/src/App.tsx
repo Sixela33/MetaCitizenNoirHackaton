@@ -41,7 +41,7 @@ function App() {
           <div>{user.firstName} {user.lastName}</div>
           <div>{user.email}</div>
           <img src={user.avatarUrl} alt="Profile" />
-          {!kycStatus && <KycButton />}
+          <KycButton />
           {kycStatus && kycStatus.list && kycStatus.list.items && kycStatus.list.items.length > 0 && (
             <div className="p-4 border rounded-lg max-w-md">
               <h3 className="text-lg font-bold mb-3">KYC Information</h3>
