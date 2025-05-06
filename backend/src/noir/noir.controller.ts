@@ -19,9 +19,6 @@ export class NoirController {
 
     const witness = await this.noirService.generateWitness(formattedData);
     const proof = await this.noirService.generateProof(witness.witness);
-    
-    return {
-      proof: proof
-    };
+    return proof
   }
 }

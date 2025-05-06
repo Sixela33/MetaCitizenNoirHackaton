@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import axiosInstance from '../utils/axios';
 
-export default function ProofGeneratorInator() {
+type props = {
+    proof: any,
+    setProof: (proof: any) => void
+}   
 
-    const [proof, setProof] = useState<any>(null);
+export default function ProofGeneratorInator({proof, setProof}: props) {
+
 
     const generateProof = async () => {
         try {
@@ -14,12 +18,12 @@ export default function ProofGeneratorInator() {
         }
     }
 
-    {proof && console.log(Object.keys(proof.proof))}
-    {proof && console.log("proof", JSON.stringify(proof.proof.proof))}
-    {proof && console.log("publicInputs", proof.proof.publicInputs)}
-
     function copyProof() {
-        navigator.clipboard.writeText(JSON.stringify(proof.proof.proof));
+        navigator.clipboard.writeText(JSON.stringify(proof.proof));
+    }
+
+    function copyPublicInputs() {
+        navigator.clipboard.writeText(JSON.stringify(proof.publicInputs));
     }
 
     return (
@@ -27,9 +31,11 @@ export default function ProofGeneratorInator() {
             <button onClick={generateProof}>Generate Proof!</button>
             
             {proof && <div>
-                <button onClick={copyProof}>copy proof</button>
-            
-                {JSON.stringify(proof)}
+                <p className='text-green-500'>Proof Generated Successfully!</p>
+                <div className='flex space-x-2'>
+                    <button onClick={copyProof}>copy proof</button>
+                    <button onClick={copyPublicInputs}>copy public inputs</button>  
+                </div>
             </div>}
         </div>
     )

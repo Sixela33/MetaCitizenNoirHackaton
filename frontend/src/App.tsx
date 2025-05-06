@@ -3,10 +3,13 @@ import './App.css'
 import axiosInstance from './utils/axios';
 import KycButton from './_components/KycButton';
 import ProofGeneratorInator from './components/ProofGeneratorInator';
+import { ConnectButton } from '@rainbow-me/rainbowkit'; 
+import ContractInteractor from './components/ContractInteractor';
 
 function App() {  
   const [user, setUser] = useState<any>(null);
   const [kycStatus, setKycStatus] = useState<any>(null);
+  const [proof, setProof] = useState<any>(null);
 
   const handleGoogleLogin = () => {
     window.location.href = 'http://localhost:3000/auth/google/login';
@@ -36,6 +39,7 @@ function App() {
 
   return (
     <>
+      <ConnectButton/>
       <button onClick={handleGoogleLogin}>Login with Google</button>
       {user && 
         <div className='flex space-y-2 flex-col items-center justify-center'>
@@ -73,7 +77,13 @@ function App() {
                   <p>Review Date: {kycStatus.list.items[0].review.reviewDate}</p>
                 </div>
               )}
-            <ProofGeneratorInator />
+            <ProofGeneratorInator proof={proof} setProof={setProof} />
+            {
+              proof &&
+              <div className='mt-4'>
+                <ContractInteractor proof={proof.proof} />
+              </div>
+            }
             </div>
           )}
         </div>

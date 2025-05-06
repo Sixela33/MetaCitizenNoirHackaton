@@ -7,7 +7,7 @@ import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20P
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Gate} from "./Gate.sol";
 
-contract MyToken is ERC20, Ownable, ERC20Permit, Gate {
+contract GatedToken is ERC20, Ownable, ERC20Permit, Gate {
     constructor(
         address initialOwner,
         address _identityRegistry

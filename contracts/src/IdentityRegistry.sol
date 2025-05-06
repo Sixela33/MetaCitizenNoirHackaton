@@ -15,7 +15,6 @@ contract IdentityRegistry {
     mapping(address => Identity) public identities;
 
     constructor(
-        address _verifier,
         bytes32[] memory _publicInputs
     ) {
         verifier = new HonkVerifier();
