@@ -10,8 +10,8 @@ type witnessGenerationParams = {
     passport_should_be_valid: boolean;
     aml_security: number;
     min_aml_security: number;
-    user_country: number;
-    restricted_countries: number[];
+    user_country_hash: string;
+    restricted_country_hashes: string[];
 }
 
 @Injectable()
@@ -57,12 +57,10 @@ export class NoirService {
         const applicantInfo = userData.list?.items?.[0]?.info;
         const reviewData = userData.list?.items?.[0]?.review;
         
-
         if (!applicantInfo) {
             throw new Error('No KYC data found for this user');
         }
-
-                
+      
         // Calculate age from dateOfBirth
         const dateOfBirth = new Date(applicantInfo.dob);
         const today = new Date();
@@ -79,11 +77,20 @@ export class NoirService {
         const idDoc = applicantInfo.idDocs?.[0];
         const passportIsValid = idDoc ? new Date(idDoc.validUntil) > new Date() : false;
         
-        // Get AML security score (this is an example, adjust based on your actual data)
+        // Get AML security score
         const amlSecurity = reviewData.reviewResult.reviewAnswer == 'GREEN' ? 2 : reviewData.reviewResult.reviewAnswer == 'YELLOW' ? 1 : 0;
         
-        // Get user country
-        const userCountry = 5 // applicantInfo.nationality || '';
+        // TODO: get the actual country hash
+        const userCountryHash = "0x222222222122222"  //     applicantInfo.nationality || '';
+        
+        // TODO: get the actual restricted country hashes
+        const restrictedCountryHashes = [
+            "0x111111111111111", "0x222222222222222", "0x333333333333333",
+            "0x444444444444444", "0x555555555555555", "0x666666666666666",
+            "0x777777777777777", "0x888888888888888", "0x999999999999999",
+            "0xaaaaaaaaaaaaaaa", "0xbbbbbbbbbbbbbbb", "0xccccccccccccccc",
+            "0xddddddddddddddd", "0xeeeeeeeeeeeeeee", "0xfffffffffffffff"
+        ];
         
         const formattedData = {
             age: age,
@@ -92,14 +99,13 @@ export class NoirService {
             passport_should_be_valid: true,
             aml_security: amlSecurity,
             min_aml_security: 1,
-            user_country: userCountry,
-            restricted_countries: [0,1,2,3,4,3,6,7,8,9,10,11,12,13,14],
+            user_country_hash: userCountryHash,
+            restricted_country_hashes: restrictedCountryHashes,
         };
 
         //console.log(formattedData);
         
         return formattedData;
-
     }
 }
 

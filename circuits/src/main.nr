@@ -3,17 +3,22 @@ fn main(
   min_age: pub u8, 
   aml_security: u8, 
   min_aml_security: pub u8,
-  user_country: u32, 
-  restricted_countries: pub [u32; 15],
+  user_country_hash: Field, 
+  restricted_country_hashes: pub [Field; 15],
   passport_is_valid: bool,
   passport_should_be_valid: bool,
 ) {
   assert(age >= min_age);
   assert(aml_security >= min_aml_security);
 
-  for i in 0..restricted_countries.len() {
-    assert(user_country != restricted_countries[i]);
+  // Check if user's country hash matches any restricted country hash
+  let mut is_restricted = false;
+  for i in 0..restricted_country_hashes.len() {
+    if user_country_hash == restricted_country_hashes[i] {
+      is_restricted = true;
+    }
   }
+  assert(!is_restricted);
 
   assert(passport_is_valid == passport_should_be_valid);
 }
@@ -22,11 +27,17 @@ fn main(
 fn test_main() {
   main(
     20,
-      18,
-      1,
+    18,
     1,
-    16,
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    1,
+    0x123456789abcdef, // Example hash for an allowed country
+    [
+      0x111111111111111, 0x222222222222222, 0x333333333333333,
+      0x444444444444444, 0x555555555555555, 0x666666666666666,
+      0x777777777777777, 0x888888888888888, 0x999999999999999,
+      0xaaaaaaaaaaaaaaa, 0xbbbbbbbbbbbbbbb, 0xccccccccccccccc,
+      0xddddddddddddddd, 0xeeeeeeeeeeeeeee, 0xfffffffffffffff
+    ],
     true,
     true
   );
@@ -39,9 +50,15 @@ fn test_restricted_countries() {
     18,
     1,
     1,
-    5,
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    0x555555555555555, // Using a hash that matches a restricted country
+    [
+      0x111111111111111, 0x222222222222222, 0x333333333333333,
+      0x444444444444444, 0x555555555555555, 0x666666666666666,
+      0x777777777777777, 0x888888888888888, 0x999999999999999,
+      0xaaaaaaaaaaaaaaa, 0xbbbbbbbbbbbbbbb, 0xccccccccccccccc,
+      0xddddddddddddddd, 0xeeeeeeeeeeeeeee, 0xfffffffffffffff
+    ],
     true,
-    false
+    true
   );
 }

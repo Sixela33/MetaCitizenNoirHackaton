@@ -14,10 +14,23 @@ export default function ProofGeneratorInator() {
         }
     }
 
+    {proof && console.log(Object.keys(proof.proof))}
+    {proof && console.log("proof", JSON.stringify(proof.proof.proof))}
+    {proof && console.log("publicInputs", proof.proof.publicInputs)}
+
+    function copyProof() {
+        navigator.clipboard.writeText(JSON.stringify(proof.proof.proof));
+    }
+
     return (
         <div>
             <button onClick={generateProof}>Generate Proof!</button>
-            {proof && <div>{JSON.stringify(proof)}</div>}
+            
+            {proof && <div>
+                <button onClick={copyProof}>copy proof</button>
+            
+                {JSON.stringify(proof)}
+            </div>}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 {
     "noir_version": "1.0.0-beta.3+ceaa1986628197bd1170147f6a07f0f98d21030a",
-    "hash": 10322713338925094223,
+    "hash": 10772264745663833133,
     "abi": {
         "parameters": [
             {
@@ -40,36 +40,46 @@
                 "visibility": "public"
             },
             {
-                "name": "user_country",
+                "name": "user_country_hash",
                 "type": {
-                    "kind": "integer",
-                    "sign": "unsigned",
-                    "width": 32
+                    "kind": "field"
                 },
                 "visibility": "private"
             },
             {
-                "name": "restricted_countries",
+                "name": "restricted_country_hashes",
                 "type": {
                     "kind": "array",
                     "length": 15,
                     "type": {
-                        "kind": "integer",
-                        "sign": "unsigned",
-                        "width": 32
+                        "kind": "field"
                     }
                 },
                 "visibility": "public"
+            },
+            {
+                "name": "passport_is_valid",
+                "type": {
+                    "kind": "boolean"
+                },
+                "visibility": "private"
+            },
+            {
+                "name": "passport_should_be_valid",
+                "type": {
+                    "kind": "boolean"
+                },
+                "visibility": "private"
             }
         ],
         "return_type": null,
         "error_types": {}
     },
-    "bytecode": "H4sIAAAAAAAA/+1aW27iQBBsg0l4hASCIbzf8O3BdrD3i6ssWnP/IyyzOy2Nhk4+lu6VkKYlNKaApqqmWgLbAfyt/fXxwxwH10fVrLrqDhYQWIXAqgQWXh9LB6sR2BOBPRNYncAaBNYksBaBvRBYm8BeCeyNwDoE1iWwdwLrGSw0+1CB20LsZNb4vlJ2ryT+TNPyeChVon7Gh+KcZ3GanT9zlassz34d8iQp8zQ/FufiGBcqTUp1yYrkYpoFXLxUHBPS2XrbvkZm7YOzGRqoOwTCBzH/X3uVF12xihh59YVCETh7cS/PiHFf/+cAVxg9qMLjDfDArB8YChxgDUgPsJT59w7wgJHXBzzGAA+Ad4ADi6Nd3AMcMnpQ4+MV29qHkuKHzAYMLeJcfR81EE8gE4iRpPgRswEj8IFA3s8gE4ixpPgxswFj8IFA3nWQCcREUvyE2YAJ+EAg7wbIBGIqKX7KbMAUfCCQdxNkAjGTFD9jNmAGPhDIuwUygZhLip8zGzAHHwjk/QIygVhIil8wG7AAHwjk3QaZQCwlxS+ZDViCDwTyfgWZQKwkxa+YDViBDwTyfgOZQKwlxa+ZDViDDwTy7oBMIDaS4jfMBmzABwJ5d0EmEFtJ8VtmA7bgA4G830EmEDtJ8TtmA3bgA4G8eyATiL2k+D2zAXvgDwTeuKer6oRB413zHG+30Fdd9YU2fW1Fn07XZ1D1STN9nkT/Ndb/hvQPYP2bp2M+r8Pcg9tCz/HWjYZZm853nnj25ID9WzL9/1xvcqtpHbe+0B8Snwu+eF5x1u/eG3zTt028hj1xr2y+qKPhrH2rL6OXCvtHMv3Jvepbx5Gj0/b7xMQB++Hc1eC2Ks5r+F53ZgJ+fsrlUiW+CwszE1kY+vkbXIPiNIksAAA=",
-    "debug_symbols": "ldXBioMwEMbxd5mzhyaZMdZXWZYSNZZAiBJ1YZG+e9NSoZRevlsmwy+X/yE7Db7brpeQxmmh9menOPVuDVMq00769LxbZpce47K6vFKralORT0M5WXuraAzRU1ur229FWsFCw8LAgr+K5vwSWqtPIbCoYWFh0XwT2h7CqOZTnFFhTrBQsNCwMLBgWAgsalhYWMDNDdyc4eYMN2e4OcPNGW7OcHOGmzPcnOHmDDcXuLnAzQVuLnBzgZsL3Fzg5gI2L0OXQ4zhenn/gcv1n8vBddG/xnFL/dt2/Z+PzeHnPPV+2LJ/vPTclefv",
+    "bytecode": "H4sIAAAAAAAA/+WceVMTQRDFXw5UwNtwqHjf924O2HjGAxFEEEEEEUTK8P0/grTulM2y8Id5bc3UThW1YQgvr9/s/DqQZEv4MzZ3vrbT26Wdr0p6lHEkM1fKmSvnzFVy5mpKw80Npcdq+nhl7B1urpMeo95GrLUa0Xiz2Z2od+NG/COqt7eSVtRsbY0ncRK3ktbPetJodJNmMtHeak9E7bjZ6MbbrXZjOxUrsXzFUZRTOk1b5zqcHkeyCz6SLpoe1UDC/1et7raMKB4m+hoxOilKmbXo1ecwcV3/5wYuEzOoILwNPJoez7qTwm1gmbDewFbh97qBR4m+ziKMDTwKLpjdqJDPmSqx5j6i1jlejVEVf5/dZEeJnCfTt/Z73tLweQPdMeLJYFX3mAqYpLsLKj5v1kNErQsIc7MyfWu/Fy0NXzTQvQS/N6vUfUkFTNINZrMeJmpdRpiblelb+71iafiKge5V+L1Zpe6rKmCS7q7Nmv27tdccmJleI2aZtz69+pNnPQJTNvDG4GdDuo7iNYwjRK0bCLNhMH1rvzctDd800L0FvxuG1H1LBUzSNW0YzExvw7ZhRL2NWBradfD/WcxsundQPMj3E7XuIkzIM31rv/csDd8z0L0PvyEvdd9XAZN0TSHPzPQB/Ia8NKE74EOe2SgfoniQHyBqPUKYkGf61n4jS8ORgW4MvyEvdeuXK0m6ppBnZlqH35CXJvQQfMgzG2UDxYP8IFGriTAhz/St/bYsDbcMdMfhN+Sl7nEVMEnXFPLMTCfgN+SlCTXAhzyzUSYoHuSPErXaCBPyTN/a72NLw48NdJ/Ab8hL3U9UwCRdU8gzM30KvyEvTSgBH/LMRvkMxYP8MaLWc4QJeaZv7feFpeEXBrod+A15vVBEXVPIMzN9Cb8hL03oGfiQZzbKVyge5I8TtV4jTMgzfWu/bywNvzHQnYTfkJe6J1XAJF1TyDMzfQu/IS9N6BX4kO8QM5xC8SB/gqj1DmFCnulb+522NDxtoDsDvyEvdc+ogEm6ppBnZvoefkNemtAU+JBnNspZFA/yJ4laHxAm5Jm+td85S8NzBrrz8BvyUve8Cpikawp5ZqYf4TfkpQnNgg95ZqNcQPEgf4qo9QlhQp7pW/tdtDS8aKC7BL8hL3UvqYBJuqaQZ2b6GX5DXprQAviQZzbKZRQP8qeJWl8QJuSZvrXfFUvDKwa6q/Ab8lL3qgqYpGsKeWamX+E35KUJLYMPeWajXEPxIH+GqPUNYUKe6Vv7Xbc0vG6guwG/IS91b6iASbqmkGdm+h1+Q16a0Br4kGc2yk3yecPOUNZ4E7Z7O+px4ID9EvU24hpxrYfABbu7vHBfpn6ZF9/yeKfSebl/Jb2vXBlSLjgn1xCSS0zIJ5DlA2ry+QV5e6u8+0leHD+Z/r785XUGe4fL2l32uD89DmQes8Opue70B230f1+ELzsG1O3Bfeqv5vxeaZ/vy5njQfc96MnGsZyfOU23Vtqvq6M/cxxSusQsY6dfs9HPXashdbuWqVPn3SF5cHruCXUf9o5y5mfuvtk9U+L7i7NeKjmP5YY7Z2pqzuX5C/5qOdOtYgAA",
+    "debug_symbols": "ldjBisIwEIDhd8nZQ5tkJhNfZVmkapVCaaXWhaX47ltlC67by3/rZPgD5btlcsd6fzvvmu7UX932Y3Jtf6jGpu/maXL6PLpequ4xXcdqGN3Wh7xxdXecvyTcN+7UtLXbann/3LhEA6NBpkFZrBYqS5HTe1HiwuMi4CKuFVGWP5fC3gvBheIi4cJwkWnhC1yUuPC4CLjA5h6be2zusbnH5h6bB2wesHnA5gGbB2wesHnA5gGbB2wesHnE5hGbR2wesXnE5hGbR2wesXnE5hGbCzYXbC7YXLC5YHPB5oLNBZsLNhdsrthcsblic8Xmis0Vmys2V2yu2FyxecLmCZsnbJ6wecLmCZsnbJ6wecLmCZsbNjdsbtjcsLlhc8Pmhs0Nmxs2N2yesXnG5hmbZ2yesXnG5hmbZ2yesXnG5mWxii5iS5L8v2RVXWx5MdFQ/EnmYT80bducd69vWvPxVzU01b6tf8fTrTu8bMfvy7JZ+svQH+rjbagfNz138/U/",
     "file_map": {
         "61": {
-            "source": "fn main(\n  age: u8, \n  min_age: pub u8, \n  aml_security: u8, \n  min_aml_security: pub u8,\n  user_country: u32, \n  restricted_countries: pub [u32; 15]\n) {\n  assert(age >= min_age);\n  assert(aml_security >= min_aml_security);\n\n  for i in 0..restricted_countries.len() {\n    assert(user_country != restricted_countries[i]);\n  }\n}\n\n/*\n  fn main(age: u8, min_age: pub u8) {\n    assert(age >= min_age);\n  }\n\n  #[test]\n  fn test_main() {\n    main(20, 18);\n  }\n*/",
+            "source": "fn main(\n  age: u8, \n  min_age: pub u8, \n  aml_security: u8, \n  min_aml_security: pub u8,\n  user_country_hash: Field, \n  restricted_country_hashes: pub [Field; 15],\n  passport_is_valid: bool,\n  passport_should_be_valid: bool,\n) {\n  assert(age >= min_age);\n  assert(aml_security >= min_aml_security);\n\n  // Check if user's country hash matches any restricted country hash\n  let mut is_restricted = false;\n  for i in 0..restricted_country_hashes.len() {\n    if user_country_hash == restricted_country_hashes[i] {\n      is_restricted = true;\n    }\n  }\n  assert(!is_restricted);\n\n  assert(passport_is_valid == passport_should_be_valid);\n}\n\n#[test]\nfn test_main() {\n  main(\n    20,\n    18,\n    1,\n    1,\n    0x123456789abcdef, // Example hash for an allowed country\n    [\n      0x111111111111111, 0x222222222222222, 0x333333333333333,\n      0x444444444444444, 0x555555555555555, 0x666666666666666,\n      0x777777777777777, 0x888888888888888, 0x999999999999999,\n      0xaaaaaaaaaaaaaaa, 0xbbbbbbbbbbbbbbb, 0xccccccccccccccc,\n      0xddddddddddddddd, 0xeeeeeeeeeeeeeee, 0xfffffffffffffff\n    ],\n    true,\n    true\n  );\n}\n\n#[test(should_fail)]\nfn test_restricted_countries() {\n  main(\n    20,\n    18,\n    1,\n    1,\n    0x555555555555555, // Using a hash that matches a restricted country\n    [\n      0x111111111111111, 0x222222222222222, 0x333333333333333,\n      0x444444444444444, 0x555555555555555, 0x666666666666666,\n      0x777777777777777, 0x888888888888888, 0x999999999999999,\n      0xaaaaaaaaaaaaaaa, 0xbbbbbbbbbbbbbbb, 0xccccccccccccccc,\n      0xddddddddddddddd, 0xeeeeeeeeeeeeeee, 0xfffffffffffffff\n    ],\n    true,\n    true\n  );\n}",
             "path": "/home/s1x3l4/Desktop/onchain_id/prototypeV2/circuits/src/main.nr"
         }
     },
