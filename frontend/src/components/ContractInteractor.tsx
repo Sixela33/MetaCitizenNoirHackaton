@@ -2,12 +2,12 @@ import identityRegistryAbi from '../abis/IdentityRegistry.json';
 import { useAccount } from 'wagmi';
 import { useWalletClient } from 'wagmi';
 import { waitForTransactionReceipt, writeContract } from 'viem/actions';
+import { toHex } from 'viem';
 
 export default function ContractInteractor({proof}: any) {
-    const identityRegistryAddress = import.meta.env.PUBLIC_VITE_IDENTITY_REGISTRY_CONTRACT_ADDRESS;
+    const identityRegistryAddress = "0x91D9F2dEC7728183C7e17C72381F565De6C77316" // import.meta.env.PUBLIC_VITE_IDENTITY_REGISTRY_CONTRACT_ADDRESS;
     const { address } = useAccount();
     const { data: walletClient } = useWalletClient();
-
 
     const validateIdentity = async () => {
       if (!address) {
@@ -20,12 +20,21 @@ export default function ContractInteractor({proof}: any) {
         return;
       }
 
+      // Convert the proof to a proper bytes format
+      // First ensure we have a Uint8Array
+      const proofBytes = new Uint8Array(Object.values(proof));
+      
+      // Convert to hex string with 0x prefix
+      const proofHex = toHex(proofBytes);
+
+      console.log("proofHex", proofHex)
+      
       try {
         const transaction_hash = await writeContract(walletClient, {
           address: identityRegistryAddress,
           abi: identityRegistryAbi.abi,
           functionName: "registerIdentity",
-          args: [proof],
+          args: [proofHex],
         });
 
         console.log(transaction_hash);

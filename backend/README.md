@@ -1,3 +1,40 @@
+# Meta Citizen Backend
+
+The backend is in charge of managing private user data and proof generation.
+
+## Technology Stack
+
+- **Framework**: [NestJS](https://nestjs.com/) - A progressive Node.js framework for building efficient and scalable server-side applications
+- **Database**: PostgreSQL - A powerful, open-source object-relational database system
+- **Authentication**: JWT (JSON Web Tokens) with refresh token rotation
+- **OAuth**: Google authentication integration
+- **Identity Verification**: SumSub integration
+- **Zero-Knowledge Proofs**: Noir integration
+
+## Prerequisites
+
+- Node.js (v14 or later)
+- PostgreSQL
+- npm or yarn
+
+## Getting Started
+
+To start first complete the .env file with your enviroment variables, this is fundamental to begin utilizing the platform
+
+### Installation
+
+```bash
+  yarn install
+```
+
+### Start the development server 
+
+```bash
+  npm run start:dev
+```
+
+# Nest
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
