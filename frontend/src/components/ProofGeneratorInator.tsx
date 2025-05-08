@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axiosInstance from '../utils/axios';
+import { Button } from './ui/button';
 
 type props = {
     proof: any,
@@ -28,13 +29,13 @@ export default function ProofGeneratorInator({proof, setProof}: props) {
 
     return (
         <div>
-            <button onClick={generateProof}>Generate Proof!</button>
+            <Button onClick={generateProof}>Generate Proof!</Button>
             
             {proof && <div>
                 <p className='text-green-500'>Proof Generated Successfully!</p>
                 <div className='flex space-x-2'>
-                    <button onClick={copyProof}>copy proof</button>
-                    <button onClick={copyPublicInputs}>copy public inputs</button>  
+                    <Button onClick={copyProof}>Copy proof</Button>
+                    <Button onClick={copyPublicInputs}>Copy public inputs</Button>  
                 </div>
             </div>}
         </div>

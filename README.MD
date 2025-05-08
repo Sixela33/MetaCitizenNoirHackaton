@@ -79,3 +79,9 @@ MetaCitizen leverages several key technologies:
 - **DAO Governance**: Verify member identity for voting rights
 - **Tokenized Securities**: Ensure investors meet accreditation requirements
 - **Cross-chain Identity**: Portable identity verification across multiple blockchains
+
+## Possible routes to take
+
+1. Google oauth like implementation
+2. Site Admin side where he creates a new identity registry with his own permissions (could be used)
+3. 

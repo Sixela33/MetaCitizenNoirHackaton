@@ -3,9 +3,9 @@ import { useAccount } from 'wagmi';
 import { useWalletClient } from 'wagmi';
 import { waitForTransactionReceipt, writeContract } from 'viem/actions';
 import { toHex } from 'viem';
-
+import { Button } from './ui/button';
 export default function ContractInteractor({proof}: any) {
-    const identityRegistryAddress = "0x91D9F2dEC7728183C7e17C72381F565De6C77316" // import.meta.env.PUBLIC_VITE_IDENTITY_REGISTRY_CONTRACT_ADDRESS;
+    const identityRegistryAddress = import.meta.env.VITE_IDENTITY_REGISTRY_CONTRACT_ADDRESS;
     const { address } = useAccount();
     const { data: walletClient } = useWalletClient();
 
@@ -22,13 +22,12 @@ export default function ContractInteractor({proof}: any) {
 
       // Convert the proof to a proper bytes format
       // First ensure we have a Uint8Array
-      const proofBytes = new Uint8Array(Object.values(proof));
+      const proofBytes = new Uint8Array(Object.values(proof.proof));
       
       // Convert to hex string with 0x prefix
       const proofHex = toHex(proofBytes);
 
-      console.log("proofHex", proofHex)
-      
+      console.log(proofHex.length)
       try {
         const transaction_hash = await writeContract(walletClient, {
           address: identityRegistryAddress,
@@ -47,6 +46,6 @@ export default function ContractInteractor({proof}: any) {
     };
 
   return (
-    <button onClick={validateIdentity}>Validate Identity</button>
+    <Button onClick={validateIdentity}>Validate Identity</Button>
   );
 }

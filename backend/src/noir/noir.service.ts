@@ -43,7 +43,7 @@ export class NoirService {
     }
 
     async generateProof(witness: Uint8Array): Promise<ProofData> {
-        const proof = await this.backend.generateProof(witness);
+        const proof = await this.backend.generateProof(witness, {keccak: true});
         return proof;
     }
 

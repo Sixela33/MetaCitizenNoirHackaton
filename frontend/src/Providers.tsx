@@ -6,7 +6,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { wagmiConfig } from './utils/wagmiConfig';
-
+import { SidebarProvider } from './components/ui/sidebar';
 
 const queryClient = new QueryClient();
 
@@ -15,7 +15,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          {children}
+          <SidebarProvider>
+            {children}
+          </SidebarProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
