@@ -9,7 +9,7 @@ MetaCitizen uses zero-knowledge proofs to allow users to verify their identity w
 ## User Flow
 
 ### Sequence diagram
-:::mermaid
+```mermaid
 sequenceDiagram
     participant User
     participant GoogleAuth
@@ -33,10 +33,10 @@ sequenceDiagram
     
     ExternalProtocol->>Blockchain: Query identity registry
     Blockchain->>ExternalProtocol: Validate user identity for access control
-:::
+```
 
 ### Multi Platform use diagram
-:::mermaid
+```mermaid
 flowchart TD
 E[Identity Registry]
 E <-->|Time-limited validity| F[On-chain Verification]
@@ -44,7 +44,7 @@ F -->|Access granted| G[External Protocols]
 G1[DeFi Protocol] -->|Query identity| F
 G2[DAO Governance] -->|Query identity| F
 G3[Tokenized Assets] -->|Query identity| F
-:::
+```
 
 
 ### User Story:
