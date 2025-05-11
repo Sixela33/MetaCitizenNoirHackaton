@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { SumsubModule } from './sumsub/sumsub.module';
+import { NoirService } from './noir/noir.service';
+import { NoirModule } from './noir/noir.module';
 
 @Module({
   imports: [
@@ -22,8 +25,10 @@ import { AuthModule } from './auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    SumsubModule,
+    NoirModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, NoirService],
 })
 export class AppModule {}
