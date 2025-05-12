@@ -63,6 +63,6 @@ export class AuthController {
     });
     
     // Redirect to frontend without exposing token in URL
-    res.redirect('http://localhost:5173');
+    res.redirect('http://localhost:5173/verification');
   }
 }
