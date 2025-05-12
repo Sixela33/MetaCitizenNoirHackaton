@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axiosInstance from '../utils/axios';
 import { Button } from './ui/button';
+import { toHex } from 'viem';
 
 type props = {
     proof: any,
@@ -20,7 +21,14 @@ export default function ProofGeneratorInator({proof, setProof}: props) {
     }
 
     function copyProof() {
-        navigator.clipboard.writeText(JSON.stringify(proof.proof));
+        // Convert the proof to a proper bytes format
+        // First ensure we have a Uint8Array
+        const proofBytes = new Uint8Array(Object.values(proof.proof));
+      
+        // Convert to hex string with 0x prefix
+        const proofHex = toHex(proofBytes);
+        
+        navigator.clipboard.writeText(proofHex);
     }
 
     function copyPublicInputs() {
@@ -32,7 +40,7 @@ export default function ProofGeneratorInator({proof, setProof}: props) {
             <Button onClick={generateProof}>Generate Proof!</Button>
             
             {proof && <div>
-                <p className='text-green-500'>Proof Generated Successfully!</p>
+                <p className='text-green-500 mx-auto'>Proof Generated Successfully!</p>
                 <div className='flex space-x-2'>
                     <Button onClick={copyProof}>Copy proof</Button>
                     <Button onClick={copyPublicInputs}>Copy public inputs</Button>  

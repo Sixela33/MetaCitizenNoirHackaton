@@ -4,30 +4,35 @@ import { useWalletClient } from 'wagmi';
 import { waitForTransactionReceipt, writeContract } from 'viem/actions';
 import { toHex } from 'viem';
 import { Button } from './ui/button';
-export default function ContractInteractor({proof}: any) {
+import { toast } from 'sonner';
+
+export default function ContractInteractor({proof}: {proof: any}) {
     const identityRegistryAddress = import.meta.env.VITE_IDENTITY_REGISTRY_CONTRACT_ADDRESS;
     const { address } = useAccount();
     const { data: walletClient } = useWalletClient();
 
     const validateIdentity = async () => {
       if (!address) {
-        console.log("No address found")
-        return
+        toast.error("Please connect your wallet first");
+        return;
       }
 
       if (!walletClient) {
-        console.log("No wallet client found");
+        toast.error("Wallet client not available");
+        return;
+      }
+
+      if (!proof || !proof.proof) {
+        toast.error("No proof available to submit");
         return;
       }
 
       // Convert the proof to a proper bytes format
-      // First ensure we have a Uint8Array
       const proofBytes = new Uint8Array(Object.values(proof.proof));
-      
-      // Convert to hex string with 0x prefix
       const proofHex = toHex(proofBytes);
 
-      console.log(proofHex.length)
+      toast.info("Submitting proof to blockchain...");
+      
       try {
         const transaction_hash = await writeContract(walletClient, {
           address: identityRegistryAddress,
@@ -36,16 +41,30 @@ export default function ContractInteractor({proof}: any) {
           args: [proofHex],
         });
 
-        console.log(transaction_hash);
+        toast.loading(`Transaction submitted: ${transaction_hash.slice(0, 10)}...`);
 
-        const response = await waitForTransactionReceipt(walletClient, {hash: transaction_hash});
-        console.log(response);
-      } catch (error) {
+        const receipt = await waitForTransactionReceipt(walletClient, {
+          hash: transaction_hash
+        });
+        
+        if (receipt.status === 'success') {
+          toast.success("Identity successfully validated!");
+        } else {
+          toast.error("Transaction failed");
+        }
+      } catch (error: any) {
         console.error("Error validating identity:", error);
+        toast.error(error.message || "Failed to validate identity");
       }
     };
 
   return (
-    <Button onClick={validateIdentity}>Validate Identity</Button>
+    <Button 
+      onClick={validateIdentity} 
+      className="w-full md:w-auto"
+      size="lg"
+    >
+      Validate Identity
+    </Button>
   );
 }

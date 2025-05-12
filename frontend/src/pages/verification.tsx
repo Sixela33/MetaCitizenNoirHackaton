@@ -5,7 +5,7 @@ import ContractInteractor from '../components/ContractInteractor';
 import KycButton from '../components/KycButton';
 import { Button } from '../components/ui/button';
 
-function Test() {  
+function Verification() {  
   const [user, setUser] = useState<any>(null);
   const [kycStatus, setKycStatus] = useState<any>(null);
   const [proof, setProof] = useState<any>(null);
@@ -18,6 +18,14 @@ function Test() {
     const res = await axiosInstance.get('/user/profile');
     console.log("res.data", res.data);
     setUser(res.data);
+  }
+
+  async function logOut() {
+    const res = await axiosInstance.post('/auth/signout');
+    console.log("res.data", res.data);
+    setUser(null);
+    setKycStatus(null);
+    setProof(null);
   }
 
   async function getKycStatus() {
@@ -38,14 +46,13 @@ function Test() {
 
   return (
     <div className='p-4 flex flex-col gap-4 mx-auto'>
-      <Button onClick={handleGoogleLogin} >Login with Google</Button>
+      {!user ? <Button onClick={handleGoogleLogin} >Login with Google</Button> : <Button onClick={logOut} >Log Out</Button>}
       {user && 
         <div className='flex space-y-2 flex-col items-center justify-center'>
           <div>{user.firstName} {user.lastName}</div>
           <div>{user.email}</div>
           <img src={user.avatarUrl} alt="Profile" />
-          <KycButton />
-          {kycStatus && kycStatus.list && kycStatus.list.items && kycStatus.list.items.length > 0 && (
+          {kycStatus && kycStatus.list && kycStatus.list.items && kycStatus.list.items.length > 0 ? (
             <div className="p-4 border rounded-lg max-w-md">
               <h3 className="text-lg font-bold mb-3">KYC Information</h3>
               
@@ -77,19 +84,20 @@ function Test() {
               )}
             <ProofGeneratorInator proof={proof} setProof={setProof} />
             {
-              /**
-              proof &&
-              <div className='mt-4'>
+                /**
+                 * 
+                proof &&
+                <div className='mt-4'>
                 <ContractInteractor proof={proof} />
-              </div>
-              */
+                </div>
+                */
             }
             </div>
-          )}
+          ): <KycButton />}
         </div>
       }
     </div>
   )
 }
 
-export default Test
+export default Verification
