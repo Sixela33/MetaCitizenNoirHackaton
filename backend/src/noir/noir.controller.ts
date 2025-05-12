@@ -13,12 +13,26 @@ export class NoirController {
   @UseGuards(JwtAuthGuard)
   @Get('generate-proof')
   async generateProof(@Request() req: any) {
-    const userData = await this.sumsubService.getApplicantData(req.user.id);
+    try {
+      const userData = await this.sumsubService.getApplicantData(req.user.id);
+      console.log("Raw user data:", JSON.stringify(userData, null, 2));
 
-    const formattedData = await this.noirService.formatUserDataForWitnessGeneration(userData);
-
-    const witness = await this.noirService.generateWitness(formattedData);
-    const proof = await this.noirService.generateProof(witness.witness);
-    return proof
+      const formattedData = await this.noirService.formatUserDataForWitnessGeneration(userData);
+      
+      console.log("formattedData:", formattedData);
+      const witness = await this.noirService.generateWitness(formattedData);
+      console.log("Witness generate d:", !!witness);
+      
+      const proof = await this.noirService.generateProof(witness.witness);
+      console.log("Proof generated:", !!proof);
+      
+      const verified = await this.noirService.verifyProof(proof);
+      console.log("Verification result:", verified);
+      
+      return proof;
+    } catch (error) {
+      console.error("Error in generate-proof endpoint:", error);
+      throw error;
+    }
   }
 }

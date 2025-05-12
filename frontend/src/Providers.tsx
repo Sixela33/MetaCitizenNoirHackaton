@@ -13,7 +13,13 @@ const queryClient = new QueryClient();
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      {children}
+      <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <RainbowKitProvider>
+            {children}
+          </RainbowKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
     </SidebarProvider>
   );
 };

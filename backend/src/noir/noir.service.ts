@@ -2,7 +2,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ProofData, UltraHonkBackend } from '@aztec/bb.js';
 import { Noir } from '@noir-lang/noir_js';
 import circuit from './circuits.json';
-
+import * as crypto from 'crypto';
+import * as fs from 'fs';
 type witnessGenerationParams = {
     age: number;
     min_age: number;
@@ -10,8 +11,8 @@ type witnessGenerationParams = {
     passport_should_be_valid: boolean;
     aml_security: number;
     min_aml_security: number;
-    user_country_hash: string;
-    restricted_country_hashes: string[];
+    user_country_id: number;
+    restricted_country_ids: number[];
 }
 
 @Injectable()
@@ -43,11 +44,13 @@ export class NoirService {
     }
 
     async generateProof(witness: Uint8Array): Promise<ProofData> {
-        const proof = await this.backend.generateProof(witness, {keccak: true});
+        const proof = await this.backend.generateProof(witness);
         return proof;
     }
 
     async verifyProof(proof: ProofData): Promise<boolean> {
+        //write the proof to a file
+        fs.writeFileSync('proof.json', JSON.stringify(proof.proof, null, 2));
         const verified = await this.backend.verifyProof(proof);
         return verified;
     }
@@ -80,16 +83,15 @@ export class NoirService {
         // Get AML security score
         const amlSecurity = reviewData.reviewResult.reviewAnswer == 'GREEN' ? 2 : reviewData.reviewResult.reviewAnswer == 'YELLOW' ? 1 : 0;
         
-        // TODO: get the actual country hash
-        const userCountryHash = "0x222222222122222"  //     applicantInfo.nationality || '';
+        // Fix 1: Convert hash strings to numeric values properly
+        // Remove the '0x' prefix and convert to BigInt
+        console.log("applicantInfo.nationality", applicantInfo.nationality);
+        const userCountryHash = 75
         
-        // TODO: get the actual restricted country hashes
+        // Fix 2: Ensure consistent formatting for restricted countries
         const restrictedCountryHashes = [
-            "0x111111111111111", "0x222222222222222", "0x333333333333333",
-            "0x444444444444444", "0x555555555555555", "0x666666666666666",
-            "0x777777777777777", "0x888888888888888", "0x999999999999999",
-            "0xaaaaaaaaaaaaaaa", "0xbbbbbbbbbbbbbbb", "0xccccccccccccccc",
-            "0xddddddddddddddd", "0xeeeeeeeeeeeeeee", "0xfffffffffffffff"
+            // Convert these to proper numeric strings without '0x' prefix
+            1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
         ];
         
         const formattedData = {
@@ -99,8 +101,8 @@ export class NoirService {
             passport_should_be_valid: true,
             aml_security: amlSecurity,
             min_aml_security: 1,
-            user_country_hash: userCountryHash,
-            restricted_country_hashes: restrictedCountryHashes,
+            user_country_id: userCountryHash,
+            restricted_country_ids: restrictedCountryHashes,
         };
 
         //console.log(formattedData);

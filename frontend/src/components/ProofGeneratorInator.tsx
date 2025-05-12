@@ -23,12 +23,15 @@ export default function ProofGeneratorInator({proof, setProof}: props) {
     function copyProof() {
         // Convert the proof to a proper bytes format
         // First ensure we have a Uint8Array
+
         const proofBytes = new Uint8Array(Object.values(proof.proof));
       
+
+
         // Convert to hex string with 0x prefix
         const proofHex = toHex(proofBytes);
         
-        navigator.clipboard.writeText(proofHex);
+        navigator.clipboard.writeText(proofBytes.toString());
     }
 
     function copyPublicInputs() {

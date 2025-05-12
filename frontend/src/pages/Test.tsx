@@ -77,12 +77,10 @@ function Test() {
               )}
             <ProofGeneratorInator proof={proof} setProof={setProof} />
             {
-              /**
               proof &&
               <div className='mt-4'>
                 <ContractInteractor proof={proof} />
               </div>
-              */
             }
             </div>
           )}

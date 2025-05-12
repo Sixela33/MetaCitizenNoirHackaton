@@ -5,6 +5,7 @@ import { waitForTransactionReceipt, writeContract } from 'viem/actions';
 import { toHex } from 'viem';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function ContractInteractor({proof}: {proof: any}) {
     const identityRegistryAddress = import.meta.env.VITE_IDENTITY_REGISTRY_CONTRACT_ADDRESS;
@@ -27,12 +28,10 @@ export default function ContractInteractor({proof}: {proof: any}) {
         return;
       }
 
-      // Convert the proof to a proper bytes format
-      const proofBytes = new Uint8Array(Object.values(proof.proof));
-      const proofHex = toHex(proofBytes);
+      console.log('proof', proof.proof);
 
-      toast.info("Submitting proof to blockchain...");
-      
+      const proofHex = toHex(Uint8Array.from(Object.values(proof.proof)));
+
       try {
         const transaction_hash = await writeContract(walletClient, {
           address: identityRegistryAddress,
@@ -59,12 +58,15 @@ export default function ContractInteractor({proof}: {proof: any}) {
     };
 
   return (
-    <Button 
-      onClick={validateIdentity} 
-      className="w-full md:w-auto"
-      size="lg"
-    >
-      Validate Identity
-    </Button>
+    <div>
+      <ConnectButton/>
+      <Button 
+        onClick={validateIdentity} 
+        className="w-full md:w-auto"
+        size="lg"
+        >
+        Validate Identity
+      </Button>
+      </div>
   );
 }

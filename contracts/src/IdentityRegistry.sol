@@ -6,15 +6,14 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract IdentityRegistry is Ownable {
 
-    HonkVerifier public verifier;
-    bytes32[] public publicInputs;
-
-    mapping(bytes32 => bool) public nullifiers;
-
     struct Identity {
         uint256 expiration;
     }
 
+    HonkVerifier public verifier;
+    bytes32[] public publicInputs;
+
+    mapping(bytes32 => bool) public nullifiers;
     mapping(address => Identity) public identities;
 
     error InvalidProof();

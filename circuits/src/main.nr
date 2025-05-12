@@ -3,8 +3,8 @@ fn main(
   min_age: pub u8, 
   aml_security: u8, 
   min_aml_security: pub u8,
-  user_country_hash: Field, 
-  restricted_country_hashes: pub [Field; 15],
+  user_country_id: pub u32, 
+  restricted_country_ids: pub [u32; 15],
   passport_is_valid: bool,
   passport_should_be_valid: bool,
 ) {
@@ -13,8 +13,8 @@ fn main(
 
   // Check if user's country hash matches any restricted country hash
   let mut is_restricted = false;
-  for i in 0..restricted_country_hashes.len() {
-    if user_country_hash == restricted_country_hashes[i] {
+  for i in 0..restricted_country_ids.len() {
+    if user_country_id == restricted_country_ids[i] {
       is_restricted = true;
     }
   }
